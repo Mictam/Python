@@ -3,7 +3,7 @@ import string
 
 
 VARS = string.ascii_lowercase + string.ascii_uppercase
-OPS = "|&>^=~"
+OPS = "|&>^="
 PRIO = {'~': 6, '^': 5, '&': 4, '|': 3, '>': 2, '=': 1}
 
 def Implication(a, b):
@@ -136,11 +136,11 @@ def SeparateVarOp(expr):
     tab = list("".join(expr.split()))
     vartab = []
     for x in tab:
-        if(x in VARS):
+        if(x in VARS and x not in vartab):
             vartab.append(x)
     optab = []
     for x in tab:
-        if(x in OPS):
+        if(x in OPS and x not in optab): 
             optab.append(x)
     
     return sorted(vartab), sorted(optab)
@@ -182,7 +182,7 @@ def ToStr(expr):
 def Eval(expr):
     
     var, ops = SeparateVarOp(expr)
-    GeneratedArrays = Generator(variables)
+    GeneratedArrays = Generator(var)
     
     for SingleArray in GeneratedArrays:
 
@@ -203,7 +203,6 @@ def Eval(expr):
         for i in BoolRPN:
 
             w = i
-            
             if i in OPS:
                 k1 = ToBool(stack.pop())
                 k2 = ToBool(stack.pop())
@@ -221,7 +220,8 @@ def Eval(expr):
                     else: 
                         i = "1"
                 w = i
-        
+            
+            
             ifneg = 0
             stack.append(w)
 
