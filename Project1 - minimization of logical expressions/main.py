@@ -236,3 +236,14 @@ def Taut(expr):
         if(i[0]=='0'): 
             t=False
     return t
+
+def CreateMArray(expr):
+    tab, var = Eval(expr)
+    res = []
+    k = 0
+    for i in tab:
+        if( i[0] == '1'):
+            res.append(k)
+        k+=1
+    return res
+                
