@@ -2,7 +2,7 @@ from operator import or_, and_, not_, xor, eq
 import string
 
 
-VARS = string.ascii_lowercase + string.ascii_uppercase
+VARS = string.ascii_lowercase + string.ascii_uppercase + "01"
 OPS = "|&>^="
 PRIO = {'~': 6, '^': 5, '&': 4, '|': 3, '>': 2, '=': 1}
 
@@ -206,7 +206,7 @@ def Eval(expr):
             if i in OPS:
                 k1 = ToBool(stack.pop())
                 k2 = ToBool(stack.pop())
-                if(ifneg): k2= not k2
+               # if(ifneg): k1= not k1
                 w = ToStr(OPExec[i](k1, k2))
                 
             if i == "~":
@@ -220,8 +220,6 @@ def Eval(expr):
                     else: 
                         i = "1"
                 w = i
-            
-            
             ifneg = 0
             stack.append(w)
 
@@ -247,3 +245,4 @@ def CreateMArray(expr):
         k+=1
     return res
                 
+    
