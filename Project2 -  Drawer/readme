@@ -1,0 +1,3 @@
+Give .json file as program argument to print an image in new window (sample.json is a example file).
+Give -o or --output and then name of a file in which you want to save image (as .png)
+To quit window press q or ESC.
